@@ -19,16 +19,11 @@ namespace Conversions
 
         private void btnRToA_Click(object sender, EventArgs e)
         {
-            try
-            {
+
                 int a = NumberConversion.RomanToArabic(inputText.Text);
                 outputText.Text = a.ToString();
-            }
-            catch
-            {
 
 
-            }
         }
 
         private void btnAToR_Click(object sender, EventArgs e)
