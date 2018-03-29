@@ -32,6 +32,8 @@
             this.btnAToR = new System.Windows.Forms.Button();
             this.inputText = new System.Windows.Forms.TextBox();
             this.outputText = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnRToA
@@ -56,24 +58,44 @@
             // 
             // inputText
             // 
-            this.inputText.Location = new System.Drawing.Point(12, 117);
+            this.inputText.Location = new System.Drawing.Point(65, 49);
             this.inputText.Name = "inputText";
-            this.inputText.Size = new System.Drawing.Size(91, 20);
+            this.inputText.Size = new System.Drawing.Size(156, 20);
             this.inputText.TabIndex = 2;
             // 
             // outputText
             // 
-            this.outputText.Location = new System.Drawing.Point(173, 117);
+            this.outputText.Location = new System.Drawing.Point(65, 128);
             this.outputText.Name = "outputText";
             this.outputText.ReadOnly = true;
-            this.outputText.Size = new System.Drawing.Size(85, 20);
+            this.outputText.Size = new System.Drawing.Size(156, 20);
             this.outputText.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(110, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Input Value";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(108, 112);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Output Value";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.outputText);
             this.Controls.Add(this.inputText);
             this.Controls.Add(this.btnAToR);
@@ -91,6 +113,8 @@
         private System.Windows.Forms.Button btnAToR;
         private System.Windows.Forms.TextBox inputText;
         private System.Windows.Forms.TextBox outputText;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

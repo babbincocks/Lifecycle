@@ -10,32 +10,30 @@ using System.Windows.Forms;
 
 namespace Conversions
 {
-    public partial class Form1 : Form
+    public partial class ListTest : Form
     {
-        public Form1()
+        public ListTest()
         {
             InitializeComponent();
         }
 
         private void btnRToA_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int a = NumberConversion.RomanToArabic(inputText.Text);
-                outputText.Text = a.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
         }
 
         private void btnAToR_Click(object sender, EventArgs e)
         {
             try
             {
-                string a = NumberConversion.ArabicToRoman(int.Parse(inputText.Text));
-                outputText.Text = a;
+                int count = 1;
+                while (count <= 3999)
+                {
+                    string a = NumberConversion.ArabicToRoman(int.Parse(lbOutput.Text));
+                    lbOutput.Text = a;
+                    count++;
+                }
+
             }
             catch (Exception ex)
             {
@@ -43,5 +41,4 @@ namespace Conversions
             }
         }
     }
-
 }
