@@ -119,8 +119,9 @@ namespace Conversions
                 if (hasInt)
                 {
                     throw new FormatException("Please insert only valid Roman numerals (I, V, X, L, C, D, M).");
-
                 }
+
+                if (roman.Contains(""))
 
                 /*
                  A for-loop is established that will create what will essentially function as
