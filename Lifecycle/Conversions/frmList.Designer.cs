@@ -1,6 +1,6 @@
 ﻿namespace Conversions
 {
-    partial class ListTest
+    partial class frmList
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.lbOutput = new System.Windows.Forms.ListBox();
-            this.btnAToR = new System.Windows.Forms.Button();
-            this.btnRToA = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbOutput
@@ -41,36 +40,26 @@
             this.lbOutput.Size = new System.Drawing.Size(260, 173);
             this.lbOutput.TabIndex = 0;
             // 
-            // btnAToR
+            // btnExit
             // 
-            this.btnAToR.Location = new System.Drawing.Point(201, 225);
-            this.btnAToR.Name = "btnAToR";
-            this.btnAToR.Size = new System.Drawing.Size(79, 36);
-            this.btnAToR.TabIndex = 3;
-            this.btnAToR.Text = "Arabic To Roman";
-            this.btnAToR.UseVisualStyleBackColor = true;
-            this.btnAToR.Click += new System.EventHandler(this.btnAToR_Click);
+            this.btnExit.Location = new System.Drawing.Point(105, 225);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(79, 36);
+            this.btnExit.TabIndex = 3;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // btnRToA
-            // 
-            this.btnRToA.Location = new System.Drawing.Point(12, 225);
-            this.btnRToA.Name = "btnRToA";
-            this.btnRToA.Size = new System.Drawing.Size(79, 36);
-            this.btnRToA.TabIndex = 2;
-            this.btnRToA.Text = "Roman To Arabic";
-            this.btnRToA.UseVisualStyleBackColor = true;
-            this.btnRToA.Click += new System.EventHandler(this.btnRToA_Click);
-            // 
-            // ListTest
+            // frmList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 273);
-            this.Controls.Add(this.btnAToR);
-            this.Controls.Add(this.btnRToA);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lbOutput);
-            this.Name = "ListTest";
-            this.Text = "ListTest";
+            this.Name = "frmList";
+            this.Text = "Conversion List";
+            this.Load += new System.EventHandler(this.ListTest_Load);
             this.ResumeLayout(false);
 
         }
@@ -78,7 +67,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox lbOutput;
-        private System.Windows.Forms.Button btnAToR;
-        private System.Windows.Forms.Button btnRToA;
+        private System.Windows.Forms.Button btnExit;
     }
 }

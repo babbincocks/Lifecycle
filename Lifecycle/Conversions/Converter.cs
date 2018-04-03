@@ -114,14 +114,25 @@ namespace Conversions
             try
             {
                 //An initial variable for what will be returned at the end is declared.
+                
                 int returnArabic = 0;
-                bool hasInt = roman.All(char.IsDigit);
-                if (hasInt)
+                bool let = roman.All(char.IsLetter);
+                if (!let)
                 {
                     throw new FormatException("Please insert only valid Roman numerals (I, V, X, L, C, D, M).");
                 }
+                roman = roman.ToUpper();
 
-                if (roman.Contains(""))
+                if (roman.Contains("VV") || roman.Contains("LL") || roman.Contains("DD"))
+                {
+                    throw new FormatException("The syntax rules of Roman numerals states that you should never have two or more V's, L's, or D's together. Instead, use X to replace VV, C to replace LL, and M to replace DD.");
+
+                }
+
+                if (roman.Contains("IIII") || roman.Contains("XXXX") || roman.Contains("CCCC"))
+                {
+                    throw new FormatException("The syntax rules of Roman numerals states that you should never have any character sequentially repeated more than 3 times.");
+                }
 
                 /*
                  A for-loop is established that will create what will essentially function as

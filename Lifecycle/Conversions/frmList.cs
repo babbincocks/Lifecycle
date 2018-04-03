@@ -10,28 +10,23 @@ using System.Windows.Forms;
 
 namespace Conversions
 {
-    public partial class ListTest : Form
+    public partial class frmList : Form
     {
-        public ListTest()
+        public frmList()
         {
             InitializeComponent();
         }
 
-        private void btnRToA_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void btnAToR_Click(object sender, EventArgs e)
+        private void ListTest_Load(object sender, EventArgs e)
         {
             try
             {
-                int count = 1;
-                while (count <= 3999)
+                for (int count = 1; count <= 3999; count++)
                 {
-                    string a = NumberConversion.ArabicToRoman(int.Parse(lbOutput.Text));
-                    lbOutput.Text = a;
-                    count++;
+                    string a = count + " = " + NumberConversion.ArabicToRoman(count) + "." + Environment.NewLine;
+                    lbOutput.Items.Add(a);
                 }
 
             }
@@ -39,6 +34,11 @@ namespace Conversions
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
