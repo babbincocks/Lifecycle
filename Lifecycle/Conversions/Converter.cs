@@ -134,6 +134,7 @@ namespace Conversions
                     throw new FormatException("The syntax rules of Roman numerals states that you should never have any character sequentially repeated more than 3 times.");
                 }
 
+                
                 /*
                  A for-loop is established that will create what will essentially function as
                  a cursor (hence the variable's name), and as long as the value (which works as
@@ -166,6 +167,8 @@ namespace Conversions
                     {
                         returnArabic += RomanToInt[roman[cursor]];
                     }
+
+                    if ()
                     /*
                     The reason for the subtraction part of this is so when you get numerals
                     like, say, MDLIV, and the cursor has scanned the first three numerals 
@@ -174,6 +177,9 @@ namespace Conversions
                     than itself (which V is, so it fits that criteria as well), so it subtracts
                     I (1), and then it'll add V(5), so it works out.
                      */
+
+                    
+
                      if (returnArabic > 3999)
                     {
                         throw new ArgumentOutOfRangeException("Any value you input that is larger than 3999 will be inaccurate, unfortunately.", new Exception());
@@ -189,19 +195,4 @@ namespace Conversions
         }
 
     }
-
-    ////This block of variables retrieve a count of how many times each character
-    ////shows up in what the user put in, so the user can't just put in 20 I's,
-    ////for example; they would have to put in "XX".
-    //int mCo = roman.Split('M').Length - 1;
-    //int dCo = roman.Split('D').Length - 1;
-    //int cCo = roman.Split('C').Length - 1;
-    //int lCo = roman.Split('L').Length - 1;
-    //int xCo = roman.Split('X').Length - 1;
-    //int vCo = roman.Split('V').Length - 1;
-    //int iCo = roman.Split('I').Length - 1;
-
-    //if (mCo > 3 || dCo > 1 || cCo > 3 || lCo > 1 || xCo > 3 || vCo > 1 || iCo > 3)
-    //    throw new AggregateException("You have too many of one of your numerals: there can't be more than one D, L, or V, and no more than 3 of any other numeral.", new Exception[mCo, dCo, cCo, lCo, xCo, vCo, iCo]);
-
 }

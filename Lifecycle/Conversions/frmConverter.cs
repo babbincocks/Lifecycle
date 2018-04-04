@@ -17,31 +17,7 @@ namespace Conversions
             InitializeComponent();
         }
 
-        private void btnRToA_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int a = NumberConversion.RomanToArabic(txtInput.Text);
-                txtOutput.Text = a.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
-        private void btnAToR_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string a = NumberConversion.ArabicToRoman(int.Parse(txtInput.Text));
-                txtOutput.Text = a;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
@@ -58,10 +34,12 @@ namespace Conversions
                     int a = NumberConversion.RomanToArabic(txtInput.Text);
                     txtOutput.Text = a.ToString();
                 }
+                ep1.Clear();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                ep1.SetError(txtInput, "The value you attempted to convert did not fit the formatting of either Arabic numbers or Roman numerals.");
             }
         }
 
@@ -75,6 +53,7 @@ namespace Conversions
         {
             txtInput.Text = "";
             txtOutput.Text = "";
+            ep1.Clear();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
