@@ -9,7 +9,7 @@ namespace Conversions
     public class NumberConversion
     {
         private static Dictionary<char, int> RomanToInt = new Dictionary<char, int>()
-            { //This is a dictionary that will be used for Roman to Arabic. 
+            { //This is a dictionary that will be used for Roman to Arabic conversions. 
             //It shows each Roman numeral, and the value that they correspond to.
                 {'I', 1},
                 {'V', 5},
@@ -128,7 +128,8 @@ namespace Conversions
 
 
         public static int RomanToArabic(string roman)
-        {//I wanted inputs from the user to have 
+        {//I wanted inputs from the user to have to follow the grammatical rules of Roman numerals
+            //so there will be checks in this method to ensure that the user's input follows these rules.
             try
             {
                 //An initial variable for what will be returned at the end is declared.
@@ -149,8 +150,9 @@ namespace Conversions
                 }
 
                 /*
-                 This is another check, to make sure that there aren't any values that aren't letters. If they input a letter that isn't
-                 a Roman numeral, it will still be covered, as it won't be in the dictionary that was created earlier.
+                 This is another check, to make sure that there aren't any values that aren't 
+                 letters. If they input a letter that isn't a Roman numeral, it will still be 
+                 covered, as it won't be in the dictionary that was created earlier.
                  */
                 bool let = roman.All(char.IsLetter);
                 if (!let)
@@ -166,10 +168,24 @@ namespace Conversions
 
                 }
 
-                //That there aren't too many sequential X's or C's (I'm allowing four I's in a row, as that's a bit common.)
+                //That there aren't too many sequential X's or C's.
                 if (roman.Contains("XXXX") || roman.Contains("CCCC"))
                 {
                     throw new FormatException("The syntax rules of Roman numerals states that you should never have any character sequentially repeated more than 3 times.");
+                }
+
+                /*
+                There technically aren't supposed to be four I's in a row either, but I
+                set up a special way to allow users to input just "IIII" and have it work,
+                but something like "VIIII" will not be allowed. It begins with a Boolean
+                variable that starts out false. If the user's input contains "IIII", this
+                variable is set to true. After the end of the for loop coming up, there will 
+                be the other half to this.
+                */
+                bool c = false;
+                if (roman.Contains("IIII"))
+                {
+                    c = true;
                 }
 
                 //I's can't be directly subtracted from such large values.
@@ -233,13 +249,34 @@ namespace Conversions
                      */
 
 
-
+                    //This is one last check to see if the number, after all that has happened,
+                    //is over 3999. If it is, it returns an error, telling the user to stick
+                    //with values 3999 and under.
                     if (returnArabic > 3999)
                     {
                         throw new ArgumentOutOfRangeException("Any value you input that is larger than 3999 will be inaccurate, unfortunately.", new Exception());
                     }
+
+                    
                 }
-                //Then it finishes with returning the value that has been added into.
+                /*
+                 Here is the other half to the Boolean expression from above the for loop.
+                 This activates if the input string contained "IIII". It checks if the string
+                 was just "IIII". If it was, it sets the return value to 4. Otherwise, it
+                 returns an error.
+                 */
+                if (c)
+                {
+                    if (roman == "IIII")
+                    {
+                        returnArabic = 4;
+                    }
+                    else
+                    {
+                        throw new FormatException("The syntax rules of Roman numerals technically don't allow for there to be 4 I's in a row, but it's commonly done to represent just the number 4. This will allow 4 I's by themselves, but in no other context.");
+                    }
+                }
+                //Finally, it returns the value that has been added into.
                 return returnArabic;
             }
             catch (Exception ex)
