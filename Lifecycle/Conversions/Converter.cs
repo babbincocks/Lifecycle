@@ -23,12 +23,16 @@ namespace Conversions
         public static string ArabicToRoman(int Arabic)
         {
 
-            
-                string returnRoman = "";
+
+            string returnRoman = "";
             try
             {
                 if (Arabic > 3999 || Arabic < 1)
                     throw new ArgumentOutOfRangeException("Your input value must be between 1 and 3999, unfortunately.", new Exception());
+                if (Arabic.ToString().Contains("."))
+                {
+                    throw new FormatException("Decimals aren't allowed.");
+                }
                 while (Arabic >= 1000)
                 {
                     returnRoman += "M";
@@ -102,7 +106,7 @@ namespace Conversions
             {
                 throw ex;
             }
-            
+
 
         }
 
@@ -110,12 +114,29 @@ namespace Conversions
 
 
         public static int RomanToArabic(string roman)
-        {
+        {//I wanted inputs from the user to have 
             try
             {
                 //An initial variable for what will be returned at the end is declared.
-                
                 int returnArabic = 0;
+
+
+
+                /*This checks for a decimal point, and brings up the proper error message.
+                The reason why it's down here is because of how the code for the convert
+                button works, in that it checks to see if all characters used are numbers.
+                If they are, it goes for ArabicToRoman, but if it isn't, it goes to
+                RomanToArabic. As "." is not a number, and would be used if someone tried
+                a decimal, it goes here in the RomanToArabic method.
+                */
+                if (roman.Contains("."))
+                {
+                    throw new FormatException("Decimals aren't allowed.");
+                }
+
+                /*
+                 This is another check, to make sure that there aren't any 
+                 */
                 bool let = roman.All(char.IsLetter);
                 if (!let)
                 {
@@ -129,12 +150,25 @@ namespace Conversions
 
                 }
 
-                if (roman.Contains("IIII") || roman.Contains("XXXX") || roman.Contains("CCCC"))
+                if (roman.Contains("XXXX") || roman.Contains("CCCC"))
                 {
                     throw new FormatException("The syntax rules of Roman numerals states that you should never have any character sequentially repeated more than 3 times.");
                 }
 
-                
+                if (roman.Contains("IM") || roman.Contains("ID") || roman.Contains("IC"))
+                {
+                    throw new FormatException("The syntax rules of Roman numerals states that you can't put I's next to M's, D's, or C's in a subtractive sense.");
+                }
+
+                if (roman.Contains("XD") || roman.Contains("XM"))
+                {
+                    throw new FormatException("The syntax rules of Roman numerals states that you can't put X's next to M's or D's in a subtractive sense.");
+                }
+                if (roman.Contains("VM") || roman.Contains("VD") || roman.Contains("VC"))
+                {
+                    throw new FormatException("The syntax rules of Roman numerals states that you can't put V's next to M's, D's, or C's in a subtractive sense.");
+                }
+
                 /*
                  A for-loop is established that will create what will essentially function as
                  a cursor (hence the variable's name), and as long as the value (which works as
@@ -168,7 +202,7 @@ namespace Conversions
                         returnArabic += RomanToInt[roman[cursor]];
                     }
 
-                    if ()
+                    //if ()
                     /*
                     The reason for the subtraction part of this is so when you get numerals
                     like, say, MDLIV, and the cursor has scanned the first three numerals 
@@ -178,9 +212,9 @@ namespace Conversions
                     I (1), and then it'll add V(5), so it works out.
                      */
 
-                    
 
-                     if (returnArabic > 3999)
+
+                    if (returnArabic > 3999)
                     {
                         throw new ArgumentOutOfRangeException("Any value you input that is larger than 3999 will be inaccurate, unfortunately.", new Exception());
                     }
@@ -192,6 +226,34 @@ namespace Conversions
             {
                 throw ex;
             }
+        }
+
+        public static int ArabicToHex(string Arabic)
+        {
+            try
+            {
+                int returnHex = Convert.ToInt32(Arabic, 16);
+
+                return returnHex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static int HexToArabic(string Hex)
+        {
+            try
+            {
+                int returnArabic = Convert.ToInt32(Hex, 10);
+
+                return returnArabic;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
     }
