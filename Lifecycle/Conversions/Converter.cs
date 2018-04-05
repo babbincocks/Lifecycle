@@ -23,41 +23,54 @@ namespace Conversions
         public static string ArabicToRoman(int Arabic)
         {
 
-
+            //This announces an initial variable that will be the Roman numeral that is returned at the end.
             string returnRoman = "";
             try
             {
+                //First we check to see if the user input is out of range of what we want to allow with an if statement.
                 if (Arabic > 3999 || Arabic < 1)
                     throw new ArgumentOutOfRangeException("Your input value must be between 1 and 3999, unfortunately.", new Exception());
-                if (Arabic.ToString().Contains("."))
+                //Then we check to see if the user put any decimals in their statement (handles both forms of decimals used).
+                //Since we can't really handle decimals either, those can't be allowed.
+                if (Arabic.ToString().Contains(".") || Arabic.ToString().Contains(","))
                 {
                     throw new FormatException("Decimals aren't allowed.");
                 }
+                //Then it checks to see if thethe number is greater than 1000, and if so, it will add an M to the roman numeral,
+                //and subtract 1000 from the value of the user input. It will keep doing this until the while loop is no longer true,
+                //up to a maximum of 3 times (as we made sure the value can't be 4000 or more). 
                 while (Arabic >= 1000)
                 {
                     returnRoman += "M";
                     Arabic -= 1000;
                 }
+                //Then the same process repeats for 900, and adds the special ordering of CM, until it can't anymore.
+                //This repeats for every number, going down in value to the next that requires either a special ordering
+                //of characters, or a new character altogether.
                 while (Arabic >= 900)
                 {
                     returnRoman += "CM";
                     Arabic -= 900;
                 }
+                //Here's 500's (D's)
                 while (Arabic >= 500)
                 {
                     returnRoman += "D";
                     Arabic -= 500;
                 }
+                //400's (CD's)
                 while (Arabic >= 400)
                 {
                     returnRoman += "CD";
                     Arabic -= 400;
                 }
+                //100's (C's)
                 while (Arabic >= 100)
                 {
                     returnRoman += "C";
                     Arabic -= 100;
                 }
+                //And so on and so forth
                 while (Arabic >= 90)
                 {
                     returnRoman += "XC";
@@ -94,7 +107,8 @@ namespace Conversions
                     returnRoman += "IV";
                     Arabic -= 4;
                 }
-
+                //Until we get down to 1 (I), and due to the amounts of each value that was covered, it should follow the rules of
+                //Roman numerals, without too many repeats at any point.
                 while (Arabic >= 1)
                 {
                     returnRoman += "I";
@@ -135,7 +149,8 @@ namespace Conversions
                 }
 
                 /*
-                 This is another check, to make sure that there aren't any 
+                 This is another check, to make sure that there aren't any values that aren't letters. If they input a letter that isn't
+                 a Roman numeral, it will still be covered, as it won't be in the dictionary that was created earlier.
                  */
                 bool let = roman.All(char.IsLetter);
                 if (!let)
@@ -144,26 +159,31 @@ namespace Conversions
                 }
                 roman = roman.ToUpper();
 
+                //This bit ensures there aren't any sequentially repeating V's, L's, or D's.
                 if (roman.Contains("VV") || roman.Contains("LL") || roman.Contains("DD"))
                 {
                     throw new FormatException("The syntax rules of Roman numerals states that you should never have two or more V's, L's, or D's together. Instead, use X to replace VV, C to replace LL, and M to replace DD.");
 
                 }
 
+                //That there aren't too many sequential X's or C's (I'm allowing four I's in a row, as that's a bit common.)
                 if (roman.Contains("XXXX") || roman.Contains("CCCC"))
                 {
                     throw new FormatException("The syntax rules of Roman numerals states that you should never have any character sequentially repeated more than 3 times.");
                 }
 
+                //I's can't be directly subtracted from such large values.
                 if (roman.Contains("IM") || roman.Contains("ID") || roman.Contains("IC"))
                 {
                     throw new FormatException("The syntax rules of Roman numerals states that you can't put I's next to M's, D's, or C's in a subtractive sense.");
                 }
 
+                //X can't be directly subtracted from such large values.
                 if (roman.Contains("XD") || roman.Contains("XM"))
                 {
                     throw new FormatException("The syntax rules of Roman numerals states that you can't put X's next to M's or D's in a subtractive sense.");
                 }
+                //V can't be directly subtracted from such large values.
                 if (roman.Contains("VM") || roman.Contains("VD") || roman.Contains("VC"))
                 {
                     throw new FormatException("The syntax rules of Roman numerals states that you can't put V's next to M's, D's, or C's in a subtractive sense.");
@@ -228,8 +248,11 @@ namespace Conversions
             }
         }
 
+        //The rest of the code here is just a Hex to Integer converter, not necessarily part of the assignment. Haven't even really
+        //tested it either.
         public static int ArabicToHex(string Arabic)
         {
+           
             try
             {
                 int returnHex = Convert.ToInt32(Arabic, 16);
